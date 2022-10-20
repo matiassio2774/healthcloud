@@ -22,3 +22,9 @@ a {
 .component-container{
   height: 80vh;
 }
+
+.depto-card{
+  box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.4);
+  -moz-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.4);
+}

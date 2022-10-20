@@ -27,7 +27,7 @@ function Sidebar() {
             <AiOutlineSearch />
             <span>Búsqueda</span>
           </button>
-          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active ">
+          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active " onClick={()=>router.push('/departamentos')}>
             <RiHospitalLine />
             <span>Departamentos</span>
           </button>
