@@ -7,8 +7,10 @@ import { RiHospitalLine } from "react-icons/ri";
 import { FiUsers } from "react-icons/fi";
 import { GiMedicines, GiHealthNormal } from "react-icons/gi";
 import { FaBookMedical } from "react-icons/fa";
+import { useRouter } from 'next/router'
 
 function Sidebar() {
+  const router = useRouter()
   return (
     <>
       <div className="bg-secondary h-screen">
@@ -17,7 +19,7 @@ function Sidebar() {
           <p>HealthCloud </p>
         </div>
         <div className="sidebar w-60 h-max z-10 text-gray-300">
-          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active ">
+          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active " onClick={()=>router.push('/registro')}>
             <AiOutlineUserAdd />
             <span>Registro</span>
           </button>
