@@ -13,7 +13,7 @@ module.exports = {
         secondary: "#04325b",
         active: "#038587",
         button: "#015a95",
-        light: "#015a95",
+        light: "#f2f2f2",
       },
     },
   },
