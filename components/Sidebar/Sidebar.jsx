@@ -13,37 +13,37 @@ function Sidebar() {
   const router = useRouter()
   return (
     <>
-      <div className="bg-secondary h-screen">
-        <div className="w-60 h-16 text-light flex justify-center items-center gap-2 font-semibold text-xl">
+      <div className="h-screen bg-secondary">
+        <div className="flex items-center justify-center h-16 gap-2 text-xl font-semibold w-60 text-light">
           <GiHealthNormal />
           <p>HealthCloud </p>
         </div>
-        <div className="sidebar w-60 h-max z-10 text-gray-300">
-          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active " onClick={()=>router.push('/registro')}>
+        <div className="z-10 text-gray-300 sidebar w-60 h-max">
+          <button className="flex items-center justify-center w-full h-20 gap-2 border-t border-primary hover:bg-active " onClick={()=>router.push('/registro')}>
             <AiOutlineUserAdd />
             <span>Registro</span>
           </button>
-          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active " onClick={()=>router.push('/busqueda')}>
+          <button className="flex items-center justify-center w-full h-20 gap-2 border-t border-primary hover:bg-active " onClick={()=>router.push('/busqueda')}>
             <AiOutlineSearch />
             <span>Búsqueda</span>
           </button>
-          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active " onClick={()=>router.push('/departamentos')}>
+          <button className="flex items-center justify-center w-full h-20 gap-2 border-t border-primary hover:bg-active " onClick={()=>router.push('/departamentos')}>
             <RiHospitalLine />
             <span>Departamentos</span>
           </button>
-          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active ">
+          <button className="flex items-center justify-center w-full h-20 gap-2 border-t border-primary hover:bg-active " onClick={()=>router.push('/citas')}>
             <FiUsers />
-            <span>Pacientes</span>
+            <span>Citas</span>
           </button>
-          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active ">
+          <button className="flex items-center justify-center w-full h-20 gap-2 border-t border-primary hover:bg-active " onClick={()=>router.push('/doctores')}>
             <AiOutlineMedicineBox />
             <span>Doctores</span>
           </button>
-          <button className="w-full h-20 border-t border-primary flex gap-2 items-center justify-center hover:bg-active ">
+          <button className="flex items-center justify-center w-full h-20 gap-2 border-t border-primary hover:bg-active " onClick={()=>router.push('/medicamentos')}>
             <GiMedicines />
             <span>Medicamentos</span>
           </button>
-          <button className="w-full h-20 border-y border-primary flex gap-2 items-center justify-center hover:bg-active ">
+          <button className="flex items-center justify-center w-full h-20 gap-2 border-y border-primary hover:bg-active " onClick={()=>router.push('/tratamientos')}>
             <FaBookMedical />
             <span>Tratamientos</span>
           </button>
