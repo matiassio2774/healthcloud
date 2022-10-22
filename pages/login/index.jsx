@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RecepcionistaForm from "../../components/RecepcionistaForm/RecepcionistaForm";
 import DoctorForm from './../../components/DoctorForm/DoctorForm';
+import { useRouter } from 'next/router'
 
 function LoginPage() {
   const [toggleR, setToggleR] = useState(1);
   const [toggleD, setToggleD] = useState(0);
+
+  const router = useRouter()
 
   function handleClickR() {
     setToggleR(1);
@@ -15,6 +18,13 @@ function LoginPage() {
     setToggleD(1);
     setToggleR(0);
   }
+
+  useEffect(() => {
+    if (sessionStorage.getItem('rol')) {
+      router.push('/')
+    }
+  }, [])
+  
 
   return (
     <>
