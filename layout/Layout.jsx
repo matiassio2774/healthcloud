@@ -1,6 +1,11 @@
 
 import Sidebar from '../components/Sidebar/Sidebar';
-import Navbar from './../components/Navbar/Navbar';
+import dynamic from 'next/dynamic'
+
+const Nav = dynamic(
+  () => import('../components/Navbar/Navbar'),
+  { ssr: false }
+)
 
 function Layout({ children }) {
   return (
@@ -15,7 +20,7 @@ function Layout({ children }) {
       <div className="flex w-full">
         <Sidebar />
         <div className="flex flex-col w-full">
-          <Navbar />
+          <Nav />
           <main className="px-10 py-8 bg-gray-100 ">
             <div className="component-container w-full bg-white shadow-lg px-8 py-6">{children}</div>
           </main>

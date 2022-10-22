@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import RecepcionistaForm from "../../components/RecepcionistaForm/RecepcionistaForm";
 import DoctorForm from './../../components/DoctorForm/DoctorForm';
 import { useRouter } from 'next/router'
+import { useAuthContext } from "../../context/authContext";
 
 function LoginPage() {
   const [toggleR, setToggleR] = useState(1);
   const [toggleD, setToggleD] = useState(0);
+
+  const { isAuthenticated } = useAuthContext();
 
   const router = useRouter()
 
@@ -20,7 +23,7 @@ function LoginPage() {
   }
 
   useEffect(() => {
-    if (sessionStorage.getItem('rol')) {
+    if (isAuthenticated) {
       router.push('/')
     }
   }, [])

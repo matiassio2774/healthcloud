@@ -1,11 +1,14 @@
 import { useRef, useState, useEffect } from 'react';
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { useAuthContext } from "../../context/authContext";
 
 const URL = "http://localhost:3000/api/recepcionistas";
 
 function RecepcionistaForm() {
-  const [recepcionista, setRecepcionista] = useState(null) 
+  const [recepcionista, setRecepcionista] = useState(null)
+
+  const { login, isAuthenticated, saveInfo } = useAuthContext();
 
   const usuarioRef = useRef(null);
   const contraseñaRef = useRef(null);
@@ -25,8 +28,8 @@ function RecepcionistaForm() {
     try {
       const { data } = await axios.get(`${URL}/${recepcionista.usuario}/${recepcionista.contraseña}`);
       console.log(data[0])
-      sessionStorage.setItem('usuario', JSON.stringify(recepcionista.usuario))
-      sessionStorage.setItem('rol', 'recepcionista')
+      saveInfo('recepcionista')
+      login()
       router.push('/')
     } catch (error) {
       console.log(error.response.data.message);
