@@ -8,7 +8,7 @@ function LoginPage() {
   const [toggleR, setToggleR] = useState(1);
   const [toggleD, setToggleD] = useState(0);
 
-  const { isAuthenticated } = useAuthContext();
+  const { userRol } = useAuthContext();
 
   const router = useRouter()
 
@@ -23,7 +23,7 @@ function LoginPage() {
   }
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (userRol) {
       router.push('/')
     }
   }, [])

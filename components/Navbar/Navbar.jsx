@@ -28,7 +28,10 @@ function Navbar() {
           return (
             <button 
             className="text-xs bg-red-700 w-20 px-4 py-3 hover:bg-red-500 transition-all"
-            onClick={()=>logout()}
+            onClick={()=>{
+              logout()
+              router.push('/')
+            }}
           >
             Salir
           </button>
