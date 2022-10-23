@@ -21,7 +21,7 @@ function Layout({ children }) {
         <Sidebar />
         <div className="flex flex-col w-full">
           <Nav />
-          <main className="px-10 py-8 bg-gray-100 ">
+          <main className="px-10 py-8 bg-gray-200 ">
             <div className="component-container w-full bg-white shadow-lg px-8 py-6">{children}</div>
           </main>
         </div>

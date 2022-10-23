@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
       const connection = await getConnection()
       const query = `
-      SELECT id_departamento, nombre FROM departamentos;
+      SELECT id_departamento, nombre, ubicacion, jefe, camas_disponibles, camas_ocupadas FROM departamentos;
       `
       const depto = await connection.query(query)
       
