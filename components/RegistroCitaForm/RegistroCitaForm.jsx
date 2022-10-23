@@ -72,9 +72,10 @@ function RegistroCitaForm() {
     console.log(cita)
     try {
       const { data } = await axios.post(`${URL3}/`, cita);
-      console.log(data)
+      setMessage(data)
     } catch (error) {
       console.log(error.response.data.message);
+      setMessage(error.response.data.message)
     }
   }
 
