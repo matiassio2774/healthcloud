@@ -5,7 +5,7 @@ import { getConnection } from '../../../database/database';
     if (req.method === 'POST') {
   
       try {
-        const { id_cama, fecha_alta, hora_alta, id_cita } = req.body
+        const { id_cama, fecha_alta, hora_alta, id_cita, departamento } = req.body
         const connection = await getConnection()
         const query = `
         UPDATE citas 
@@ -22,8 +22,17 @@ import { getConnection } from '../../../database/database';
           disponible = false
         WHERE id_cama = ${id_cama};
         `
+        const query3 = `
+        UPDATE departamentos 
+        SET 
+            camas_disponibles = (SELECT COUNT(*) FROM camas WHERE camas.disponible = true AND camas.id_departamento = (SELECT id_departamento from departamentos WHERE departamentos.nombre = "${departamento}"))
+        WHERE
+            departamentos.nombre = "${departamento}"
+        `
+
         await connection.query(query)
         await connection.query(query2)
+        await connection.query(query3)
         return res.status(404).json({message: 'Cita dada de alta con éxito!'})
 
       } catch (error) {

@@ -64,7 +64,8 @@ function Citas() {
         id_cama: camaRef.current.value,
         fecha_alta: new Date().toLocaleDateString(),
         hora_alta: new Date().toLocaleTimeString(),
-        id_cita: currentCita.id_cita
+        id_cita: currentCita.id_cita,
+        departamento: currentCita.departamento
       })
       console.log(data)
       setIsOpen(false)
