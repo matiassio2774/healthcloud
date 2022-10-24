@@ -1,13 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 const URL = "http://localhost:3000/api/citas";
+const URL2 = "http://localhost:3000/api/camas";
+const URL3 = "http://localhost:3000/api/citas/update";
 
 function Citas() {
 
   const [citas, setCitas] = useState()
   const [defaultCitas, setDefaultCitas] = useState()
   const [busqueda, setBusqueda] = useState("")
+  const [camasDisponibles, setCamasDisponibles] = useState()
+  const [isOpen, setIsOpen] = useState(false)
+  const [currentCita, setCurrentCita] = useState()
+
+  const camaRef = useRef()
 
   useEffect(() => {
     async function getCitas(){
@@ -20,7 +27,7 @@ function Citas() {
       }
     }
     getCitas()
-  }, [])
+  }, [,isOpen])
 
   const handleChange = (e)=>{
     setBusqueda(e.target.value)
@@ -37,18 +44,65 @@ function Citas() {
     setCitas(searchResult)
   }
 
+  const handleAltaClick = async (cita) => {
+    setIsOpen(true)
+    setCurrentCita(cita)
+    // 1- Obtener camas disponibles de departamento
+    try {
+      const { data } = await axios.get(`${URL2}/${cita.departamento}`)
+      setCamasDisponibles(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleUpdatearCita = async () => {
+    
+    // Dar cita de alta: UPDATE fecha_alta, hora_alta, id_cama
+    try {
+      const { data } = await axios.post(`${URL3}`,{
+        id_cama: camaRef.current.value,
+        fecha_alta: new Date().toLocaleDateString(),
+        hora_alta: new Date().toLocaleTimeString(),
+        id_cita: currentCita.id_cita
+      })
+      console.log(data)
+      setIsOpen(false)
+    } catch (error) {
+      console.error(error)
+      setIsOpen(false)
+    }
+  }
+
+
   return (
     <>
-    <div className="flex items-center justify-center w-full">
-          <input
-            className="w-2/4 h-10 px-6 py-2 text-sm font-light bg-gray-200 border outline-none rounded-xl"
-            type="text"
-            placeholder="Búsqueda por CUIL de paciente..."
-            onChange={handleChange}
-          />
+      <div className="flex items-center justify-center w-full">
+        <input
+          className="w-2/4 h-10 px-6 py-2 text-sm font-light bg-gray-200 border outline-none rounded-xl"
+          type="text"
+          placeholder="Búsqueda por CUIL de paciente..."
+          onChange={handleChange}
+        />
+      </div>
+      {
+      isOpen && isOpen ?
+        <div className='flex flex-col items-center justify-center w-full mt-10'>
+          <div className='flex'>
+            <p>Seleccione una cama disponible:</p>
+            <select name="camas" id="camas" ref={camaRef}>
+              {camasDisponibles ? camasDisponibles.map((cama)=>(
+                <option key={cama.id_cama} value={cama.id_cama}>{cama.id_cama}</option>
+              ))
+            :
+            <p>No hay camas disponibles.</p>
+            }
+            </select>
+          </div>
+          <button type="submit" className="px-8 py-2 text-sm text-white rounded-sm bg-button hover:bg-active" onClick={handleUpdatearCita}>Dar de alta</button>
         </div>
-        {
-          citas && citas.length < 1 ? 
+      :
+      (citas && citas.length < 1 ? 
             <div className="my-6">
               <p>No se encontró una cita...</p>
             </div>
@@ -74,7 +128,7 @@ function Citas() {
                       <td>{cita.cuil}</td>
                       <td>{cita.id_cama || 'No asignada'}</td>
                       <td>{cita.fecha_registro} | {cita.hora_registro}</td>
-                      <td>{cita.fecha_alta ? cita.fecha_alta : <button type="submit" className="px-8 py-2 text-sm text-white rounded-sm bg-button hover:bg-active">Alta</button>} {cita.hora_alta && "| "+cita.hora_alta}</td>
+                      <td>{cita.fecha_alta ? cita.fecha_alta : <button type="submit" className="px-8 py-2 text-sm text-white rounded-sm bg-button hover:bg-active" onClick={() => handleAltaClick(cita)}>Alta</button>} {cita.hora_alta && "| "+cita.hora_alta}</td>
                       {}
                       {
                         !cita.fecha_alta ? null : 
@@ -89,7 +143,8 @@ function Citas() {
                 </tbody>
               </table>
             </div>
-        }
+      )
+    }
     </>
   )
 }
