@@ -4,6 +4,7 @@ import axios from 'axios'
 const URL = "http://localhost:3000/api/citas";
 const URL2 = "http://localhost:3000/api/camas";
 const URL3 = "http://localhost:3000/api/citas/update";
+const URL4 = "http://localhost:3000/api/citas/baja";
 
 function Citas() {
 
@@ -12,6 +13,7 @@ function Citas() {
   const [busqueda, setBusqueda] = useState("")
   const [camasDisponibles, setCamasDisponibles] = useState()
   const [isOpen, setIsOpen] = useState(false)
+  const [isOpenBaja, setIsOpenBaja] = useState(false)
   const [currentCita, setCurrentCita] = useState()
 
   const camaRef = useRef()
@@ -27,7 +29,7 @@ function Citas() {
       }
     }
     getCitas()
-  }, [,isOpen])
+  }, [,isOpen,isOpenBaja])
 
   const handleChange = (e)=>{
     setBusqueda(e.target.value)
@@ -44,6 +46,7 @@ function Citas() {
     setCitas(searchResult)
   }
 
+
   const handleAltaClick = async (cita) => {
     setIsOpen(true)
     setCurrentCita(cita)
@@ -56,8 +59,12 @@ function Citas() {
     }
   }
 
+  const handleBajaClick = async (cita) => {
+    setIsOpenBaja(true)
+    setCurrentCita(cita)
+  }
+
   const handleUpdatearCita = async () => {
-    
     // Dar cita de alta: UPDATE fecha_alta, hora_alta, id_cama
     try {
       const { data } = await axios.post(`${URL3}`,{
@@ -75,6 +82,25 @@ function Citas() {
     }
   }
 
+  const handleBajaCita= async () => {
+        // Dar cita de baja: UPDATE fecha_baja, hora_baja, id_cama
+    try {
+      const { data } = await axios.post(`${URL4}`,{
+        id_cama: currentCita.id_cama,
+        fecha_baja: new Date().toLocaleDateString(),
+        hora_baja: new Date().toLocaleTimeString(),
+        id_cita: currentCita.id_cita,
+        departamento: currentCita.departamento
+      })
+      console.log(data)
+      setIsOpenBaja(false)
+    } catch (error) {
+      console.error(error)
+      setIsOpenBaja(false)
+    }
+
+  }
+
 
   return (
     <>
@@ -86,7 +112,14 @@ function Citas() {
           onChange={handleChange}
         />
       </div>
-      {
+      {isOpenBaja && isOpenBaja ?
+        <div className='flex flex-col items-center justify-center w-full mt-10'>
+          <div className='flex'>
+            <p>¿Quiere dar debaja al paciente?</p>
+          </div>
+          <button type="submit" className="px-8 py-2 text-sm text-white rounded-sm bg-button hover:bg-active" onClick={handleBajaCita}>Dar de baja</button>
+        </div>
+      : 
       isOpen && isOpen ?
         <div className='flex flex-col items-center justify-center w-full mt-10'>
           <div className='flex'>
@@ -136,7 +169,7 @@ function Citas() {
                         cita.fecha_baja ? <td>{cita.fecha_baja} | {cita.hora_baja}</td>
                         :
                         <td>
-                          <button type="submit" className="px-8 py-2 text-sm text-white rounded-sm bg-button hover:bg-active">Baja</button>
+                          <button type="submit" className="px-8 py-2 text-sm text-white rounded-sm bg-button hover:bg-active" onClick={() => handleBajaClick(cita)}>Baja</button>
                         </td>
                       }
                     </tr>
