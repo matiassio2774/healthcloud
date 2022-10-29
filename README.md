@@ -3,9 +3,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 First, create 'healthcloud' database. (ex: xampp w/ phpmyAdmin)
+
 ```import the file ./database/healthcloud_CLEAN.sql in your DBMS to create all the tables, keys, etc.```
 
 Change the connection string in ./database/database.js with your credentials
+
 ```const connection = mysql.createConnection({
      host: 'your_host',
      database: 'healthcloud',
