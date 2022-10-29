@@ -249,7 +249,7 @@ function Citas() {
         </div>
       ) : (
         <div className="w-full mt-10 overflow-scroll max-h-80">
-          <table className="w-full">
+          <table className="w-full tabla-citas">
             <thead>
               <tr className="text-left">
                 <th>Departamento</th>

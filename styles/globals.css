@@ -28,3 +28,11 @@ a {
   -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.4);
   -moz-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.4);
 }
+
+.tabla-citas td{
+  width: 100px;
+}
+
+.tabla-citas tr{
+  border-bottom: 1px solid rgb(211, 211, 211);
+}
