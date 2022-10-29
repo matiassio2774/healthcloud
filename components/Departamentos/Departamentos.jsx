@@ -30,7 +30,6 @@ function Departamentos() {
                 <p>Jefe dpto.: {depto.jefe}</p>
                 <p>Ubicación: {depto.ubicacion}</p>
                 <p>Camas disponibles: {depto.camas_disponibles.toString()}</p>
-                <p>Camas ocupadas: {depto.camas_ocupadas.toString()}</p>
               </div>
             ))
           }
