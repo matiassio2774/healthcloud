@@ -8,7 +8,8 @@ First, create 'healthcloud' database. (ex: xampp w/ phpmyAdmin)
 
 Change the connection string in ./database/database.js with your credentials
 
-```const connection = mysql.createConnection({
+```
+const connection = mysql.createConnection({
      host: 'your_host',
      database: 'healthcloud',
      user: 'your_user',
