@@ -55,7 +55,7 @@ function BusquedaPacientes() {
             <p>No se encontró un paciente...</p>
           </div>
         :
-          <div className='overflow-scroll h-72 rounded-lg shadow'>
+          <div className='overflow-scroll h-80 mt-2 rounded-lg shadow '>
             <table className='w-full'>
               <thead className='border-b-2 border-gray-200'>
                 <tr className='h-10'>
