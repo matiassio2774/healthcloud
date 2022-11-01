@@ -31,7 +31,7 @@ function DoctorForm() {
     try {
       const { data } = await axios.get(`${URL}/${doctor.nombre}/${doctor.apellido}/${doctor.matricula}`);
       console.log(data[0])
-      saveInfo('doctor')
+      saveInfo('doctor', doctor.matricula)
       login()
       router.push('/')
     } catch (error) {

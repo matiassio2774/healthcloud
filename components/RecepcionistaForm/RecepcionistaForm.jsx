@@ -28,7 +28,7 @@ function RecepcionistaForm() {
     try {
       const { data } = await axios.get(`${URL}/${recepcionista.usuario}/${recepcionista.contraseña}`);
       console.log(data[0])
-      saveInfo('recepcionista')
+      saveInfo('recepcionista', recepcionista.usuario)
       login()
       router.push('/')
     } catch (error) {

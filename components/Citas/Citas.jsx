@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Select from "react-select";
+import { useAuthContext } from "../../context/authContext";
 
 const URL = "http://localhost:3000/api/citas";
 const URL2 = "http://localhost:3000/api/camas";
@@ -38,10 +39,16 @@ function Citas() {
   const duracionRef = useRef();
   const reaccionRef = useRef();
 
+  const { userName } = useAuthContext();
+
   useEffect(() => {
     async function getCitas() {
       try {
-        const { data } = await axios.get(URL);
+        const { data } = await axios.get(URL, {
+          params: {
+            matricula: userName
+          }
+        });
         setCitas(data);
         setDefaultCitas(data);
       } catch (error) {
