@@ -304,7 +304,7 @@ function Citas() {
                         <td>
                           <button
                             type="submit"
-                            className="px-8 py-2 text-sm text-white rounded-sm bg-button hover:bg-active"
+                            className="px-6 py-2 text-sm text-white rounded-sm bg-button hover:bg-active"
                             onClick={() => handleBajaClick(cita)}
                           >
                             Baja
@@ -316,7 +316,7 @@ function Citas() {
                             className="px-4 py-2 text-sm text-white rounded-sm bg-button hover:bg-active"
                             onClick={() => handleTratClick(cita)}
                           >
-                            +
+                            Asignar
                           </button>
                         </td>
                       </>
